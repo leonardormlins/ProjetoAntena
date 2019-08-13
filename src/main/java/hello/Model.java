@@ -14,27 +14,27 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-public class Model{
-	
-	ObjectContainer students = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "bd/students.db4o");
-	ObjectContainer questions = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "bd/questions.db4o");
-	ObjectContainer competencies = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "bd/competencies.db4o");
-	ObjectContainer institutions = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "bd/institutions.db4o");
-	ObjectContainer psychologists = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "bd/psychologists.db4o");
-	ObjectContainer adms = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "bd/adms.db4o");
-	
+public class Model
+{
 
+	MongoClientURI uri  = new MongoClientURI("mongodb://localhost:27017/telegram"); 
+    MongoClient client = new MongoClient();	
 	
-	public boolean addStudent(Student student){
+	
+	
+	public boolean addStudent(Student student)
+	{
 		
-		if(isUserAvailable(student.getUserName())){
+		if(isUserAvailable(student.getUserName()))
+		{
 			List<Competency> studentsCompetencies = new LinkedList<Competency>();
 			
 			Query query = competencies.query();
 			query.constrain(Competency.class);
 		    ObjectSet<Competency> allCompetencies = query.execute();
 		    
-		    for(Competency competency:allCompetencies){
+		    for(Competency competency:allCompetencies)
+		    {
 		    	studentsCompetencies.add(competency);
 		    }
 			
@@ -117,7 +117,7 @@ public class Model{
 	    
 	    return null;
 		
-	}*/
+	}
 
 	public List<Question> getAllQuestions(){
 		
@@ -150,3 +150,5 @@ public class Model{
 			}
 		}
 	}
+	*/
+}

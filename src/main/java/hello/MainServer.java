@@ -25,12 +25,8 @@ public class MainServer {
             port = 8080;
         }
         port(port);
-
-		
         
         initializeModel();
-		
-        
 		
 		staticFileLocation("/static");
 		

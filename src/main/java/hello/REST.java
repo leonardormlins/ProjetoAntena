@@ -128,244 +128,66 @@ public class REST{
 		
 	}	
 	
-	public void setAnswerbyCode(){
-		
-		get("/answer/:ra/:questionNumber/:answerCode", new Route() {
-			@Override
-            public Object handle(final Request request, final Response response){
-	        	
-	        	response.header("Access-Control-Allow-Origin", "*");
-	        	 
-	        	
-	        	
-	        	Integer ra = Integer.parseInt(request.params(":ra"));
-	        	Integer questionNumber = Integer.parseInt(request.params(":questionNumber"));
-	        	Integer answerCode = Integer.parseInt(request.params(":answerCode"));
-	            
-	            
-	            
-	            try {
-	            	
-	            	int status = model.recordAnswer(ra, questionNumber, answerCode);
-	            	
-	            	if(status == 0){
-	            		JSONArray jsonResult = new JSONArray();
-		         	    
-		         	    JSONObject jsonObj = new JSONObject();
-		         	    	
-		         	    jsonObj.put("status", "ok");
-		         	    jsonResult.put(jsonObj);
-		
-		             	return jsonResult;
-		             	
-	            	} else {
-	            		
-	            		JSONArray jsonResult = new JSONArray();
-		         	    
-		         	    JSONObject jsonObj = new JSONObject();
-		         	    	
-		         	    jsonObj.put("status", "fim");
-		         	    jsonResult.put(jsonObj);
-		
-		             	return jsonResult;
-	            		
-	            	}
-	            	
-	            	
-	             	
-	        		} catch (JSONException e) {
-	        				
-	        			e.printStackTrace();
-	        		}
-	         	    	
-	
-	     	    return null;
-	     	     
-	         }
-	         
-	      });
+//	public void setAnswerbyCode(){
+//		
+//		get("/answer/:ra/:questionNumber/:answerCode", new Route() {
+//			@Override
+//            public Object handle(final Request request, final Response response){
+//	        	
+//	        	response.header("Access-Control-Allow-Origin", "*");
+//	        	 
+//	        	
+//	        	
+//	        	Integer ra = Integer.parseInt(request.params(":ra"));
+//	        	Integer questionNumber = Integer.parseInt(request.params(":questionNumber"));
+//	        	Integer answerCode = Integer.parseInt(request.params(":answerCode"));
+//	            
+//	            
+//	            
+//	            try {
+//	            	
+//	            	int status = model.recordAnswer(ra, questionNumber, answerCode);
+//	            	
+//	            	if(status == 0){
+//	            		JSONArray jsonResult = new JSONArray();
+//		         	    
+//		         	    JSONObject jsonObj = new JSONObject();
+//		         	    	
+//		         	    jsonObj.put("status", "ok");
+//		         	    jsonResult.put(jsonObj);
+//		
+//		             	return jsonResult;
+//		             	
+//	            	} else {
+//	            		
+//	            		JSONArray jsonResult = new JSONArray();
+//		         	    
+//		         	    JSONObject jsonObj = new JSONObject();
+//		         	    	
+//		         	    jsonObj.put("status", "fim");
+//		         	    jsonResult.put(jsonObj);
+//		
+//		             	return jsonResult;
+//	            		
+//	            	}
+//	            	
+//	            	
+//	             	
+//	        		} catch (JSONException e) {
+//	        				
+//	        			e.printStackTrace();
+//	        		}
+//	         	    	
+//	
+//	     	    return null;
+//	     	     
+//	         }
+//	         
+//	      });
 
-	         
-	}
+	      
 	
 	
-	public void setComments(){
-			
-			post("/comment/", new Route() {
-				@Override
-	            public Object handle(final Request request, final Response response){
-		        	
-		           response.header("Access-Control-Allow-Origin", "*");
 
-		        	
-		        	
-		        	
-		           JSONObject json = new JSONObject(request.body());
-		        	
-		           String comment = json.getString("comment");
-		        	
-		           int ra = Integer.parseInt(json.getString("ra"));
-		        	
-		           
-	         	    
-	         	   try {
-		            	
-		            	boolean status = model.setComment(ra, comment);;
-		            	
-		            	
-		            	
-		            	if(status==true){
-		            		
-		            		
-		            		
-		            		JSONArray jsonResult = new JSONArray();
-		 	         	    JSONObject jsonObj = new JSONObject();
-		     
-			        		jsonObj.put("status", 1);
-			        		
-			        		
-			             	jsonResult.put(jsonObj);
-			             	
-			             	
-			             	
-			             	return jsonResult;
-		            		
-		            	}
-		            	
-		            	
-		             	
-		        		} catch (JSONException e) {
-		        				
-		        			e.printStackTrace();
-		        		}
-	         	    
-	         	    JSONArray jsonResult = new JSONArray();
-	         	    JSONObject jsonObj = new JSONObject();
-	         	   	
-	         	    jsonObj.put("status", 0);
-	        		
-	        		
-	             	jsonResult.put(jsonObj);
-	             	
-	             	return jsonResult;
-	         	   
-	         	   
-		        	
-			   }
-			});     
-
-	         
-	}
-	
-	public void getAllQuestions(){
-		
-		
-		
-		get("/questions", new Route() {
-			@Override
-            public Object handle(final Request request, final Response response){
-	        	
-	        	response.header("Access-Control-Allow-Origin", "*");
-
-	        	JSONArray jsonResult = new JSONArray();
-         	    
-         	    
-	        	
-	            try {
-	            	
-	            	List<Question> questions = model.getAllQuestions();
-	            	
-	            	for(Question question:questions){
-	            		
-	            		JSONObject jsonObj = new JSONObject();
-	            		jsonObj.put("number", question.getNumber());
-	            		jsonObj.put("question", question.getQuestion());
-	            		jsonResult.put(jsonObj);
-	            		
-	            	}
-	            	
-	            	return jsonResult;
-	            	
-	            	
-	             	
-	        		} catch (JSONException e) {
-	        				
-	        			e.printStackTrace();
-	        		}
-	         	    	
-	
-	     	    return null;
-	     	     
-	         }
-	         
-	      });
-		
-		
-	}
-	
-	public void setStudent(){
-		
-		post("/student", new Route() {
-			@Override
-            public Object handle(final Request request, final Response response){
-	        	
-	           response.header("Access-Control-Allow-Origin", "*");
-
-	           Gson gson = new Gson();
-	           
-	           String json = request.body();
-	           
-	           
-	           
-	           Student student = gson.fromJson(json, Student.class);
-	           
-	           
-	           
-         	    
-         	   try {
-	            	
-	            		boolean status = model.addStudent(student);
-	            		
-	            		if(status){
-	            			
-	            			JSONArray jsonResult = new JSONArray();
-		 	         	    JSONObject jsonObj = new JSONObject();
-		     
-			        		jsonObj.put("status", 1);
-			        		
-			        		
-			             	jsonResult.put(jsonObj);
-			             	
-			             	
-			             	
-			             	return jsonResult;
-	            		}
-	            		
-	            		
-	            		
-	            	
-	            	
-	            	
-	             	
-	        		} catch (JSONException e) {
-	        				
-	        			e.printStackTrace();
-	        		}
-         	    
-         	    JSONArray jsonResult = new JSONArray();
-         	    JSONObject jsonObj = new JSONObject();
-         	   	
-         	    jsonObj.put("status", 0);
-        		
-        		
-             	jsonResult.put(jsonObj);
-             	
-             	return jsonResult;
-         	   
-         	   
-	        	
-		   }
-		});     
-	}
 	
 	

@@ -1,7 +1,9 @@
 package hello;
 
-import java.util.LinkedList;
-import java.util.List;
+//import java.util.LinkedList;
+//import java.util.List;
+
+import org.bson.Document;
 
 /*import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
@@ -13,58 +15,38 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.github.fakemongo.Fongo;
 
-public class Model
-{
+	public class Model{
 
-	MongoClientURI uri  = new MongoClientURI("mongodb://localhost:27017/telegram"); 
-    MongoClient client = new MongoClient();	
+//	MongoClientURI uri  = new MongoClientURI("mongodb://localhost:27017/telegram"); 
+//    MongoClient client = new MongoClient();	
 	
+    Fongo fongo = new Fongo("Mongo");
 	
-	
-	public boolean addStudent(Student student)
+	public boolean addStudent(Document aluno)
 	{
-		
-		if(isUserAvailable(student.getUserName()))
-		{
-			List<Competency> studentsCompetencies = new LinkedList<Competency>();
-			
-			Query query = competencies.query();
-			query.constrain(Competency.class);
-		    ObjectSet<Competency> allCompetencies = query.execute();
-		    
-		    for(Competency competency:allCompetencies)
-		    {
-		    	studentsCompetencies.add(competency);
-		    }
-			
-		    student.setCompetencies(studentsCompetencies);
-		    
-		    
-			students.store(student);
-			students.commit();
-			
-			return true;
-		}
-		
-		return false;
-		
+		MongoDatabase db = fongo.getDatabase("antenas");
+		MongoCollection<Document> alunos = db.getCollection("alunos");
+    	alunos.insertOne(aluno);
+    	return true;
 	}
-	
-	
-	public boolean isUserAvailable(String username){
-		Query query = students.query();
-		query.constrain(Student.class);
-	    ObjectSet<Student> allStudents = query.execute();
-	    
-	    for(Student student:allStudents){
-	    	if(student.getUserName().equals(username)) return false;
-	    }
-	    
-	    return true;
-	}
-	
 
+}	
+	
+	
+	
+//TODO	
+//	public boolean isUserAvailable(Document aluno){
+//			    
+//	    for(Document student:allStudents){
+//	    	if(student.getUserName().equals(username)) return false;
+//	    }
+//	    
+//	    return true;
+//	}
+	
+/*
 	public Student login(String username, String password){
 		
 		Query query = students.query();
@@ -151,4 +133,3 @@ public class Model
 		}
 	}
 	*/
-}

@@ -23,6 +23,7 @@ import com.github.fakemongo.Fongo;
 //    MongoClient client = new MongoClient();	
 	
     Fongo fongo = new Fongo("Mongo");
+    MongoDatabase db = fongo.getDatabase("app");
 	
 	public boolean addStudent(Document aluno)
 	{
@@ -32,6 +33,15 @@ import com.github.fakemongo.Fongo;
     	return true;
 	}
 
+	public void loginAluno(String email, String senha) {
+		MongoCollection<Document> alunos = db.getCollection("aluno");
+
+		FindIterable<Document> username = alunos.find(new Document("email", email));
+		if (username.equals(new Document("senha", senha))) {
+			
+		}
+		
+	}
 }	
 	
 	

@@ -33,7 +33,7 @@ public class REST{
 
 	public static void cadastroAluno(){
 		
-		post("/aluno/cadastro", new Route() {
+		post("/cadastro.html", new Route() {
 			@Override
             public Object handle(final Request request, final Response response){
 	        	Document student = new Document("aluno",request.body());

@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Antenas - Cadastrado</title>
+		<link rel="stylesheet" href="css/style.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<div class="banner">
+			<i class="fas fa-satellite-dish"></i> Cadastro
+		</div>
+		<div class="img-banner"></div>
+		<div class="control-form">
+			<div id="control-aluno">
+				<form action="" method="post" id="aluno">
+					<input id="nome" type="text" placeholder="Nome">
+					<input id="ra" type="text" placeholder="RA">
+					<input id="curso" type="text" placeholder="Curso">
+					<input id="email" type="text" placeholder="E-mail">
+					<input id="senha" type="password" placeholder="Senha">
+				</form>
+					<button id="botao" type="submit" class="btn-cadAlu">Cadastrar</button>
+					
+			</div>
+		</div>
+	</body>
+	<script>
+		$(document).ready(function(){
+		
+			$('form').submit(function(e){
+				e.preventDefault();
+				
+				let userName = $('#nome').val();
+				let ra = $().val();
+				let curso = $().val();
+				let email = $().val();
+				let password = $('#senha').val();				
+				
+				let url = JSON.stringify({"nome":userName,"ra":ra ,"curso":curso,"email":email,"senha":password});
+				
+				$.post("/cadastro.html", url, function(data){
+						
+						if(data[0].status == 1){
+							alert("sucesso!");
+						} else {
+							alert("deu ruim!");
+						}
+						
+						
+				}, "json");
+			
+			});
+			
+		});
+	</script>
+</html>

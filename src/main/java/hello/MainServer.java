@@ -3,8 +3,12 @@ package hello;
 import static spark.Spark.*;
 
 
-
-
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.github.fakemongo.Fongo;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,7 +23,7 @@ public class MainServer {
     public static void main(String[] args) {
 
 		// Get port config of heroku on environment variable
-        ProcessBuilder process = new ProcessBuilder();
+        ProcessBuilder process = new ProcessBuilder();	
         Integer port;
         if (process.environment().get("PORT") != null) {
             port = Integer.parseInt(process.environment().get("PORT"));
@@ -33,7 +37,6 @@ public class MainServer {
 		staticFileLocation("/static");
 		
 		REST controller = new REST(model); 
-		
 		
 		controller.cadastroAluno();
     }

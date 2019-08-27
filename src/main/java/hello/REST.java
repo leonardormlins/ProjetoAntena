@@ -1,16 +1,8 @@
-stpackage hello;
-
-import static spark.Spark.get;
+package hello;
 import static spark.Spark.post;
 
-
-import java.io.UnsupportedEncodingException;
-import java.util.List;
-
 import org.bson.Document;
-
-import spark.Route;
-
+import org.json.JSONObject;
 
 import spark.Request;
 import spark.Response;
@@ -40,6 +32,17 @@ public class REST{
 	        	Document student = new Document("aluno",request.body());
 	        	student.append("aluno", student);
 	        	return student;
+			}
+		});
+
+	}
+	public static void loginAluno(){
+
+		post("/login", new Route() {
+			@Override
+            public Object handle(final Request request, final Response response){
+				  response.header("Access-Control-Allow-Origin", "*");
+				  
 			}
 		});
 

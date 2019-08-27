@@ -14,6 +14,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.github.fakemongo.Fongo;
 
@@ -28,21 +29,39 @@ import com.github.fakemongo.Fongo;
 	public boolean addStudent(Document aluno)
 	{
 		MongoDatabase db = fongo.getDatabase("antenas");
-		MongoCollection<Document> alunos = db.getCollection("alunos");
+		MongoCollection<Document> alunos = db.getCollection("aluno");
     	alunos.insertOne(aluno);
     	return true;
 	}
 
-	public void loginAluno(String email, String senha) {
+	public boolean login(String email, String senha) {
 		MongoCollection<Document> alunos = db.getCollection("aluno");
-
-		FindIterable<Document> username = alunos.find(new Document("email", email));
-		if (username.equals(new Document("senha", senha))) {
-			
+		FindIterable<Document> login = alunos.find(new Document("email", email).append("senha", senha));
+		if(login != null) {
+			return true;
+		}return false;
+	}
+}
+		
+		/*	MongoCursor<Document> cursor = alunos.find().iterator();
+		try {
+			while (cursor.hasNext()) {
+			Document achado1 = alunos.find(new Document("email", email)).first();
+			if(achado1.equals(alunos.find(new Document("senha", senha)))){
+				return 	
+								}
+							}
+		} finally {
+		cursor.close();
 		}
 		
-	}
-}	
+
+		FindIterable<Document> username = alunos.find(new Document("email", email));
+		if(username.equals(alunos.find(new Document("senha", senha)))) {
+	
+		}*/
+		
+
 	
 	
 	

@@ -23,7 +23,7 @@ import com.github.fakemongo.Fongo;
 //	MongoClientURI uri  = new MongoClientURI("mongodb://localhost:27017/telegram"); 
 //    MongoClient client = new MongoClient();	
 	
-    Fongo fongo = new Fongo("Mongo");
+    Fongo fongo = new Fongo("mongo");
     MongoDatabase db = fongo.getDatabase("app");
 	
 	public boolean addStudent(Document aluno)
@@ -34,7 +34,8 @@ import com.github.fakemongo.Fongo;
     	return true;
 	}
 
-	public boolean login(String email, String senha) {
+	public  boolean loginAluno(String email, String senha) {
+		
 		MongoCollection<Document> alunos = db.getCollection("aluno");
 		FindIterable<Document> login = alunos.find(new Document("email", email).append("senha", senha));
 		if(login != null) {
@@ -43,23 +44,6 @@ import com.github.fakemongo.Fongo;
 	}
 }
 		
-		/*	MongoCursor<Document> cursor = alunos.find().iterator();
-		try {
-			while (cursor.hasNext()) {
-			Document achado1 = alunos.find(new Document("email", email)).first();
-			if(achado1.equals(alunos.find(new Document("senha", senha)))){
-				return 	
-								}
-							}
-		} finally {
-		cursor.close();
-		}
-		
-
-		FindIterable<Document> username = alunos.find(new Document("email", email));
-		if(username.equals(alunos.find(new Document("senha", senha)))) {
-	
-		}*/
 		
 
 	

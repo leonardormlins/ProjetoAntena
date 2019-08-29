@@ -1,8 +1,9 @@
 package hello;
 import static spark.Spark.post;
 
+import org.json.*;
 import org.bson.Document;
-import org.json.JSONObject;
+
 
 import spark.Request;
 import spark.Response;
@@ -15,8 +16,9 @@ public class REST{
 	private Model model;
 
 
-	public REST(Model store){
-		this.model = store;
+	public REST(Model model){
+		super();
+		this.model = model;
 	}
 //	public void cadastroAluno(){
 //		post("",(req,res) -> {
@@ -36,14 +38,15 @@ public class REST{
 		});
 
 	}
-	public static void loginAluno(){
+	public  void login(){
 
 		post("/login", new Route() {
 			@Override
-            public Object handle(final Request request, final Response response){
-				  response.header("Access-Control-Allow-Origin", "*");
-				  
-			}
+			public Object handle(final Request request, final Response response){
+				JSONObject student = new JSONObject(request.body());
+				model.loginAluno(student.getString("email"), student.getString("senha"));
+				return "Login realizado";
+			} 
 		});
 
 	}

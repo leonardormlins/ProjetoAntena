@@ -36,11 +36,13 @@ public class MainServer {
 		
 		
 		controller.cadastroAluno();
+		controller.login();
     }
 	
     public static void initializeModel(){
 		
     	model.addStudent(Document.parse("{\"name\":\"pedro\", \"password\":\"12345\"}"));
+   
 		
 	}
 	

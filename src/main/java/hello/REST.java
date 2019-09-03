@@ -40,9 +40,10 @@ public class REST{
 		post("/cadastro", new Route() {
 			@Override
             public Object handle(final Request request, final Response response){
-	        	Document student = new Document("alunos",request.body());
-	        	student.append("alunos", student);
-	        	return student;
+	        	System.out.println(request.body());
+				Document student = new Document("alunos",request.body());
+				model.addStudent(student);
+				return student;
 			}
 		});
 		get("/cadastro", new Route() {

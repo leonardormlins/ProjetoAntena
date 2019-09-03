@@ -14,17 +14,25 @@
 		<div class="img-banner"></div>
 		<div class="control-form">
 			<div id="control-aluno">
-				<form action="" method="post" id="aluno">
-					<input id="nome" type="text" placeholder="Nome">
-					<input id="ra" type="text" placeholder="RA">
-					<input id="curso" type="text" placeholder="Curso">
-					<input id="email" type="text" placeholder="E-mail">
-					<input id="senha" type="password" placeholder="Senha">
+				<div id="form">
+					<div>
+						<input id="nome" type="text" placeholder="Nome">
+					</div>	
+					<div>	
+						<input id="ra" type="text" placeholder="RA">
+					</div>	
+					<div>	
+						<input id="curso" type="text" placeholder="Curso">
+					</div>	
+					<div>
+						<input id="email" type="text" placeholder="E-mail">
+					</div>	
+					<div>
+						<input id="senha" type="password" placeholder="Senha">
 					<div>
 						<button id="botao" type="submit" class="btn-cadAlu">Cadastrar</button>
 					</div>
-				</form>
-					
+				</div>
 					
 			</div>
 		</div>
@@ -32,16 +40,17 @@
 	<script>
 		$(document).ready(function(){
 			
-			$('form').submit(function(e){
-				e.preventDefault()
-				
+			$('#botao').click(function(){
+								
 				let userName = $('#nome').val()
 				let ra = $('#ra').val()
 				let curso = $('#curso').val()
 				let email = $('#email').val()
 				let password = $('#senha').val()				
-				
+									
 				let tudo = JSON.stringify({"nome":userName,"ra":ra ,"curso":curso,"email":email,"senha":password})
+				
+				alert(tudo)
 				
 				$.post("/cadastro", tudo, function(data){		
 					alert("success")

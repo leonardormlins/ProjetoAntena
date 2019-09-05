@@ -43,9 +43,14 @@ public class REST{
 		post("/login", new Route() {
 			@Override
 			public Object handle(final Request request, final Response response){
-				JSONObject student = new JSONObject(request.body());
-				model.loginAluno(student.getString("email"), student.getString("senha"));
-				return "Login realizado";
+				response.header("Access-Control-Allow-Origin", "*");
+				JSONObject json = new JSONObject(request.body());
+				String email = json.getString("userName");
+				 String password = json.getString("password");
+				if(model.loginAluno(email,password) == true);{
+					return "Login realizado.";
+				} 		 
+				
 			} 
 		});
 

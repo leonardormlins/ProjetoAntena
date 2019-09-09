@@ -1,0 +1,9 @@
+@import url("banner.css");
+@import url("fonts.css");
+@import url("cadastro.css");
+@import url("index.css");
+body{
+	margin: 0px;
+	padding: 0px;
+	font-family: 'Roboto', sans-serif;
+}

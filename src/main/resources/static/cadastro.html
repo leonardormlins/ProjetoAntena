@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Antenas - Cadastrado</title>
+		<link rel="stylesheet" href="css/style.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<div class="banner">
+			<i class="fas fa-satellite-dish"></i> Cadastro
+		</div>
+		<div class="img-banner"></div>
+		<div class="control-form">
+			<div id="control-aluno">
+				<div id="form">
+					<div>
+						<input id="nome" type="text" placeholder="Nome">
+					</div>	
+					<div>	
+						<input id="ra" type="text" placeholder="RA">
+					</div>	
+					<div>	
+						<input id="curso" type="text" placeholder="Curso">
+					</div>	
+					<div>
+						<input id="email" type="text" placeholder="E-mail">
+					</div>	
+					<div>
+						<input id="senha" type="password" placeholder="Senha">
+					<div>
+						<button id="botao" type="submit" class="btn-cadAlu">Cadastrar</button>
+					</div>
+				</div>
+					
+			</div>
+		</div>
+	</body>
+	<script>
+		$(document).ready(function(){
+			
+			$('#botao').click(function(){
+								
+				let userName = $('#nome').val()
+				let ra = $('#ra').val()
+				let curso = $('#curso').val()
+				let email = $('#email').val()
+				let password = $('#senha').val()				
+									
+				let tudo = JSON.stringify({"nome":userName,"ra":ra ,"curso":curso,"email":email,"senha":password})
+				
+				alert(tudo)
+				
+				$.post("/cadastro", tudo, function(data){		
+					alert("success")
+				}, "json")
+			
+			})
+			
+		})
+	</script>
+</html>

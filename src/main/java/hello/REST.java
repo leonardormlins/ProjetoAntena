@@ -5,11 +5,17 @@ import org.json.*;
 import org.bson.Document;
 
 
-import spark.Request;
-import spark.Response;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import com.mongodb.client.FindIterable;
+
 import spark.Route;
 
-
+import spark.Request;
+import spark.Response;
 
 public class REST{
 
@@ -20,24 +26,31 @@ public class REST{
 		super();
 		this.model = model;
 	}
-//	public void cadastroAluno(){
-//		post("",(req,res) -> {
-//
-//		});
-//	}
 
-	public static void cadastroAluno(){
-
-		post("/aluno/cadastro", new Route() {
+	public void cadastroAluno(){
+				
+		post("/cadastro", new Route() {
 			@Override
             public Object handle(final Request request, final Response response){
-	        	Document student = new Document("aluno",request.body());
-	        	student.append("aluno", student);
-	        	return student;
+	        	System.out.println(request.body());
+				Document student = new Document("alunos",request.body());
+				model.addStudent(student);
+				return student;
+			}
+		});
+		get("/cadastro", new Route() {
+
+			@Override
+            public Object handle(final Request request, final Response response){
+				FindIterable<Document> resultado = model.getStudents();
+				return StreamSupport.stream(resultado.spliterator(), false)
+				        .map(Document::toJson)
+				        .collect(Collectors.joining(", ", "[", "]"));
 			}
 		});
 
-	}
+  }
+  
 	public  void login(){
 
 		post("/login", new Route() {
@@ -53,7 +66,7 @@ public class REST{
 				
 			} 
 		});
-
+	
 	}
 }
 

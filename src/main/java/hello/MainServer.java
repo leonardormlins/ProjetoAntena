@@ -37,11 +37,13 @@ public class MainServer {
 		REST controller = new REST(model); 
 		
 		controller.cadastroAluno();
+		controller.login();
     }
 	
     public static void initializeModel(){
 		
     	model.addStudent(Document.parse("{\"name\":\"pedro\", \"password\":\"12345\"}"));
+   
 		
 	}
 	

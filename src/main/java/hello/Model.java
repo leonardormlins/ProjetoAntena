@@ -14,6 +14,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.github.fakemongo.Fongo;
 
@@ -22,8 +23,8 @@ import com.github.fakemongo.Fongo;
 //	MongoClientURI uri  = new MongoClientURI("mongodb://localhost:27017/telegram"); 
 //    MongoClient client = new MongoClient();	
 	
-    Fongo fongo = new Fongo("Mongo");
-    MongoDatabase db = fongo.getDatabase("antenas");
+  Fongo fongo = new Fongo("Mongo");
+  MongoDatabase db = fongo.getDatabase("antenas");
 	MongoCollection<Document> alunos = db.getCollection("alunos");    
     
 	public boolean addStudent(Document aluno)
@@ -32,8 +33,12 @@ import com.github.fakemongo.Fongo;
     	return true;
 	}
 
-	public FindIterable<Document> getStudents() {
-		FindIterable<Document> alunosRtn = alunos.find();
-		return alunosRtn;
+	public  boolean loginAluno(String email, String senha) {
+		
+		MongoCollection<Document> alunos = db.getCollection("aluno");
+		FindIterable<Document> login = alunos.find(new Document("email", email).append("senha", senha));
+		if(login != null) {
+			return true;
+		}return false;
 	}
-}	
+ }

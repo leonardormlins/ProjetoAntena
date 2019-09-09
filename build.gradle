@@ -2,14 +2,26 @@ repositories {
     mavenCentral()
 }
 
+apply plugin: 'eclipse'
+eclipse {
+    classpath {
+        defaultOutputDir = file('target/bin')
+    }
+}
+
 apply plugin: 'java'
-//apply plugin: 'jetty'
-apply plugin: 'application'
+apply plugin: 'eclipse'
 
-mainClassName = 'hello.MainServer'
-applicationName = 'app'
-
-defaultTasks = ['clean', 'jar']
+eclipse {
+    classpath {
+        file {
+            whenMerged {
+                def src = entries.find { it.path == 'src/main/java' }
+                src.output = "/$eclipse.project.name/classes/main-java"
+            }
+        }
+    }
+}
 
 repositories {
     // Use 'jcenter' for resolving your dependencies.

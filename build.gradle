@@ -2,42 +2,21 @@ repositories {
     mavenCentral()
 }
 
-apply plugin: 'eclipse'
-eclipse {
-    classpath {
-        defaultOutputDir = file('target/bin')
-    }
-}
-
 apply plugin: 'java'
-apply plugin: 'eclipse'
+//apply plugin: 'jetty'
+apply plugin: 'application'
 
-eclipse {
-    classpath {
-        file {
-            whenMerged {
-                def src = entries.find { it.path == 'src/main/java' }
-                src.output = "/$eclipse.project.name/classes/main-java"
-            }
-        }
-    }
-}
+mainClassName = 'hello.MainServer'
+applicationName = 'app'
 
-repositories {
-    // Use 'jcenter' for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
-}
+defaultTasks = ['clean', 'jar']
 
 dependencies {
 	compile 'com.sparkjava:spark-core:2.3'
-    compile 'org.slf4j:slf4j-api:1.7.12'
-	compile 'org.json:json:20141113'
-	compile 'com.google.code.gson:gson:1.7.2'
 	compile group: 'com.github.fakemongo', name: 'fongo', version: '2.1.0'
-	compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.3.0'    
+	compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.3.0'
+	compile 'org.json:json:20141113'
     compile group: 'junit', name: 'junit', version: '4.+'
-        // The production code uses the SLF4J logging API at compile time
 }
 
 jar {

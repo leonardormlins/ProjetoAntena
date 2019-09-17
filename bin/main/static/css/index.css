@@ -1,0 +1,49 @@
+.control-index{
+	width: 100%;
+	min-height: 100vh
+	background: #269554;
+}
+
+#element::-webkit-scrollbar {
+   display: none;
+}
+       ::-webkit-scrollbar {
+   display: none;
+}
+       ::-webkit-scrollbar {
+   display: none;
+}
+.container {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+
+.op-aluno {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  width: 50%;
+  background: #0072bb;
+	background: linear-gradient(rgba(0, 115, 187, 0.4), rgba(0, 115, 187, 0.4)), url(../img/cad.jpg);
+	background-size: cover;
+	height: 55vh;
+	line-height: 150px;
+	background-position: center;
+  padding: 1rem;
+}
+
+.op-aluno:first-child{
+	background: #269554;
+	background: linear-gradient(rgba(38, 149, 84, 0.4), rgba(38, 149, 84, 0.4)), url(../img/login.jpg);
+	background-size: cover;
+	background-position: center;
+}
+
+.op-aluno a{
+	padding: 10px;
+	background: white;
+	text-decoration: none;
+	color: black;
+	width: 200px;
+}

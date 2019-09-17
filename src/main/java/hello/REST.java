@@ -38,7 +38,7 @@ public class REST{
 				return student;
 			}
 		});
-		get("/cadastro", new Route() {
+	/*	get("/cadastro", new Route() {
 
 			@Override
             public Object handle(final Request request, final Response response){
@@ -47,7 +47,7 @@ public class REST{
 				        .map(Document::toJson)
 				        .collect(Collectors.joining(", ", "[", "]"));
 			}
-		});
+		});*/
 
   }
   

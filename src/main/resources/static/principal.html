@@ -14,6 +14,14 @@
 
         <!-- Java Script da rota dos projetos-->
   		<script src="js/projetos.js"></script>
+  		<!-- Style add -->
+  		<style type="text/css">
+			#add_project{
+				display: block;
+				align: center
+			}
+</style>
+  	
     </head>
     <body>
         <div class="container">
@@ -32,19 +40,11 @@
             </div>
 
             <div id="projetosAtribuidos" class="container tab-pane fade"><br>
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <td scope="col">Nome</th>
-                            <td scope="col">Fase</th>
-                            <td scope="col">Responsável</th>
-                            <td scope="col"></td>
-                        </tr>
-                    </thead>
-                    <tbody id="tabela-projetos">
-
-                    </tbody>
-                </table>
+				<div id="add_project">
+					<label for="codigo-projeto"></label>
+          			<input type="text" id="codigo-projeto" name="codigo-projeto" placeholder="Código do projeto:" style="align: center" required>
+					<button style="color:green">Adicionar</button>
+				</div>
             </div>
         </div>
     </body>

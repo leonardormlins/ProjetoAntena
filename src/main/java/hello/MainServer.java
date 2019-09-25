@@ -40,9 +40,6 @@ public class MainServer {
 	    model.addAluno(Document.parse("{'email':'leo@antenas.com','name':'Leo', 'senha':'12345', 'nivel':'1'}"));
 			
 		
-		
-		
-		
     }
     
     

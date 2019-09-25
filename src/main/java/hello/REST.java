@@ -1,72 +1,124 @@
 package hello;
+
+import static spark.Spark.get;
 import static spark.Spark.post;
 
-import org.json.*;
-import org.bson.Document;
-
-
-import java.io.UnsupportedEncodingException;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import com.mongodb.client.FindIterable;
+import org.bson.Document;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import spark.Route;
+import com.mongodb.client.FindIterable;
 
 import spark.Request;
 import spark.Response;
+import spark.Route;
 
-public class REST{
+public class REST {
 
 	private Model model;
 
-
-	public REST(Model model){
+	public REST(Model model) {
 		super();
 		this.model = model;
 	}
 
-	public void cadastroAluno(){
-				
-		post("/cadastro", new Route() {
+	public void loginAluno() {
+		post("/aluno", new Route() {
 			@Override
-            public Object handle(final Request request, final Response response){
-	        	System.out.println(request.body());
-				Document student = new Document("alunos",request.body());
-				model.addStudent(student);
-				return student;
-			}
-		});
-	/*	get("/cadastro", new Route() {
+			public Object handle(Request request, Response response) throws Exception {
+				response.header("Access-Control_Allow-Origin", "*");
 
-			@Override
-            public Object handle(final Request request, final Response response){
-				FindIterable<Document> resultado = model.getStudents();
-				return StreamSupport.stream(resultado.spliterator(), false)
-				        .map(Document::toJson)
-				        .collect(Collectors.joining(", ", "[", "]"));
-			}
-		});*/
-
-  }
-  
-	public  void login(){
-
-		post("/login", new Route() {
-			@Override
-			public Object handle(final Request request, final Response response){
-				response.header("Access-Control-Allow-Origin", "*");
 				JSONObject json = new JSONObject(request.body());
-				String email = json.getString("userName");
-				 String password = json.getString("password");
-				if(model.loginAluno(email,password) == true);{
-					return "Login realizado.";
-				} 		 
-				
-			} 
-		});
-	
-	}
-}
+				String email = json.getString("email");
+				String senha = json.getString("senha");
+				try {
+					Document aluno = model.login(email, senha);
+					return aluno.toJson();
 
+				} catch (NullPointerException e) {
+					return null;
+				}
+
+			}
+		});
+	}
+	public void atribuirProjeto() {
+		post("/semdono", (Request request, Response response) -> {
+			
+			response.header("Access-Control-Allow-Origin", "*");
+			
+			JSONObject json = new JSONObject(request.body());
+			String email = json.getString("email");
+			String id = json.getString("id_projeto");
+			model.atribuir(email, id);
+			
+			return model.buscaSemDono();
+		});
+	}
+	public void inserirAluno() {
+
+		post("/aluno-cadastro", (Request request, Response response) -> {
+
+			response.header("Access-Control-Allow-Origin", "*");
+
+			Document aluno = Document.parse(request.body());
+
+			model.addAluno(aluno);
+
+			return aluno.toJson();
+		});
+	}
+
+	public void projetos() {
+		get("/projetos", new Route() {
+			@Override
+			public Object handle(final Request request, final Response response) {
+
+				FindIterable<Document> projectsFound = model.listaProjetos();
+
+				return StreamSupport.stream(projectsFound.spliterator(), false).map(Document::toJson)
+						.collect(Collectors.joining(", ", "[", "]"));
+			}
+		});
+	}
+
+	public void search() {
+		get("/search", (request, response) -> {
+			return model.search(request.queryParams("chave"), request.queryParams("valor"));
+		});
+
+		get("/dono", (request, response) -> {
+			return model.buscaPorDono(request.queryParams("email"));
+		});
+
+		get("/semdono", (request, response) -> {
+			return model.buscaSemDono();
+		});
+		
+		get("/putAluno", (request, response) -> {
+			return model.atribuirAluno(request.queryParams("emailProf"), request.queryParams("_id"));
+		});
+		
+		get("/put", (request, response) -> {
+			return model.atribuir(request.queryParams("emailAluno"), request.queryParams("_id"));
+		});
+
+	}
+
+	public void alterarId() {
+		post("/alterarId", (req, res) -> {
+			model.alterarId(req.queryParams("id"), new Document("$set", Document.parse(req.body())));
+			return model.listAlunos();
+		});
+	}
+
+	public void listAlunos() {
+		get("/listarAlunos", (req, res) -> {
+			return model.listAlunos();
+		});
+	}
+
+}

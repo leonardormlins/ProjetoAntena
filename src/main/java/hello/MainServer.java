@@ -21,7 +21,7 @@ public class MainServer {
         if (process.environment().get("PORT") != null) {
             port = Integer.parseInt(process.environment().get("PORT"));
         } else {
-            port = 9090;
+            port = 9091;
         }
         port(port);
 
@@ -38,17 +38,12 @@ public class MainServer {
 	    controller.projetos();
 	    controller.atribuirProjeto();
 	    model.addAluno(Document.parse("{'email':'leo@antenas.com','name':'Leo', 'senha':'12345', 'nivel':'1'}"));
-			
-		
     }
     
     
     public static void inicializarPesquisa(){
-    	
-    	
-    	model.addProjeto(Document.parse("{'_id': '1', 'nome':'projetox', 'fase':'3', 'responsavel-cadi':'jesuka@aaa.com', 'responsavel-prof': ''}"));
-    	model.addProjeto(Document.parse("{'nome':'projetoq', 'fase':'2', 'responsavel-cadi':'rone@email.com'}"));
-		model.addProjeto(Document.parse("{'_id': '2', 'nome':'projectyas', 'fase':'1', 'responsavel-cadi':''}"));
-    
+    	model.addProjeto(Document.parse("{'_id': '1234', 'nome':'projetox', 'fase':'3', 'responsavel-aluno': '', 'responsavel-prof': ''}"));
+    	model.addProjeto(Document.parse("{'nome':'projetoA', 'fase':'2', 'responsavel-cadi':'joao@email.com'}"));
+		model.addProjeto(Document.parse("{'_id': '2', 'nome':'ProjetoB', 'fase':'1', 'responsavel-cadi':''}"));
     }
 }

@@ -46,16 +46,15 @@ public class REST {
 		});
 	}
 	public void atribuirProjeto() {
-		post("/semdono", (Request request, Response response) -> {
+		post("/add-projeto", (Request request, Response response) -> {
 			
 			response.header("Access-Control-Allow-Origin", "*");
-			
 			JSONObject json = new JSONObject(request.body());
 			String email = json.getString("email");
-			String id = json.getString("id_projeto");
+			String id = json.getString("id");
 			model.atribuir(email, id);
 			
-			return model.buscaSemDono();
+			return json;
 		});
 	}
 	public void inserirAluno() {
@@ -90,8 +89,8 @@ public class REST {
 			return model.search(request.queryParams("chave"), request.queryParams("valor"));
 		});
 
-		get("/dono", (request, response) -> {
-			return model.buscaPorDono(request.queryParams("email"));
+		get("/dono/:email", (request, response) -> {
+			return model.buscaPorDono(request.params(":email"));
 		});
 
 		get("/semdono", (request, response) -> {

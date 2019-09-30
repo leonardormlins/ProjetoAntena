@@ -64,7 +64,7 @@ public class Model {
 		MongoCollection<Document> projects = db.getCollection("projeto");
 		Document found = projects.find(new Document("_id", _id)).first();
 		BasicDBObject searchQuery = new BasicDBObject().append("_id", _id);
-		found.put("responsavel-cadi", emailAluno);
+		found.put("responsavel-aluno", emailAluno);
 		projects.replaceOne(searchQuery, found);
 		return found;
 	}

@@ -36,6 +36,7 @@ public class Model {
 		FindIterable<Document> found = projects.find(new Document("responsavel-aluno", emailAluno));
 		String foundJson = StreamSupport.stream(found.spliterator(), false).map(Document::toJson)
 				.collect(Collectors.joining(", ", "[", "]"));
+		System.out.println(foundJson);
 		return foundJson;
 	}
 

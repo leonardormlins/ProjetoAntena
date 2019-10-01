@@ -90,7 +90,8 @@ public class REST {
 		});
 
 		get("/dono/:email", (request, response) -> {
-			return model.buscaPorDono(request.params(":email"));
+			String ret = model.buscaPorDono(request.params(":email"));
+			return ret;
 		});
 
 		get("/semdono", (request, response) -> {

@@ -1,17 +1,17 @@
 $(document).ready(function (){
 	
-	/*let email = sessionStorage.getItem("sess_email_aluno");
-	let $projetos = document.querySelector('#projetos');
+	let email = sessionStorage.getItem("sess_email_aluno");
+	let tela = document.querySelector('#projetos');
 	let rota = "/dono/" + email
 	let retorno = {}
 	
-	$.get(rota, function(data){
-		retorno = data;
+	$.get(rota, function(data, err){
+		let projetos = JSON.parse(data);
+		for(let i=0; i<len(projetos);i++){
+			projetos[i].push("<tr> <td>" + this.nome + "</td><td>" + this.fase + "</td><td>" + this.responsavel-cadi + "</td></tr>");
+		}
+		$(tela).append(projetos);
 	});
-	
-	telaProjetos = $projetos.innerHTML;
-	console.log(telaProjetos);
-	console.log(retorno);*/
 	
 	$('#botao-add').click(function(){
 		let codigoProjeto = $("#codigo-projetoLabel").val();

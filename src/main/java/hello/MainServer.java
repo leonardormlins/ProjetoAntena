@@ -21,7 +21,7 @@ public class MainServer {
         if (process.environment().get("PORT") != null) {
             port = Integer.parseInt(process.environment().get("PORT"));
         } else {
-            port = 9091;
+            port = 8080;
         }
         port(port);
 
@@ -31,7 +31,7 @@ public class MainServer {
 		inicializarPesquisa();
  
 		REST controller = new REST(model);
-		
+
 		controller.inserirAluno();
 	    controller.search();
 	    controller.loginAluno();
@@ -42,8 +42,8 @@ public class MainServer {
     
     
     public static void inicializarPesquisa(){
-    	model.addProjeto(Document.parse("{'_id': '1234', 'nome':'projetox', 'fase':'3', 'responsavel-aluno': '', 'responsavel-prof': ''}"));
-    	model.addProjeto(Document.parse("{'nome':'projetoA', 'fase':'2', 'responsavel-cadi':'joao@email.com'}"));
-		model.addProjeto(Document.parse("{'_id': '2', 'nome':'ProjetoB', 'fase':'1', 'responsavel-cadi':''}"));
+    	model.addProjeto(Document.parse("{'_id': '1234', 'nome':'Programa sempre teste!', 'fase':'2', 'responsavel-aluno': '', 'responsavel-prof': '','responsavel-cadi':'joao@email.com'}"));
+    	model.addProjeto(Document.parse("{'_id':'4321','nome':'Código elegante', 'fase':'2', 'responsavel-aluno': '','responsavel-cadi':'joao@email.com'}"));
+		model.addProjeto(Document.parse("{'_id': '2', 'nome':'Integra-me', 'fase':'1', 'responsavel-aluno': '','responsavel-cadi':''}"));
     }
 }

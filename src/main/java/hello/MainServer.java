@@ -10,7 +10,7 @@ import com.mongodb.client.FindIterable;
 
 
 public class MainServer {
-	
+
 	final static Model model = new Model();
 	
     public static void main(String[] args) {
@@ -43,7 +43,7 @@ public class MainServer {
     
     public static void inicializarPesquisa(){
     	model.addProjeto(Document.parse("{'_id': '1234', 'nome':'Programa sempre teste!', 'fase':'2', 'responsavel-aluno': '', 'responsavel-prof': '','responsavel-cadi':'joao@email.com'}"));
-    	model.addProjeto(Document.parse("{'_id':'4321','nome':'Código elegante', 'fase':'2', 'responsavel-aluno': '','responsavel-cadi':'joao@email.com'}"));
+    	model.addProjeto(Document.parse("{'_id':'4321','nome':'Codigo elegante', 'fase':'1', 'responsavel-aluno': '','responsavel-cadi':'joao@email.com'}"));
 		model.addProjeto(Document.parse("{'_id': '2', 'nome':'Integra-me', 'fase':'1', 'responsavel-aluno': '','responsavel-cadi':''}"));
     }
 }

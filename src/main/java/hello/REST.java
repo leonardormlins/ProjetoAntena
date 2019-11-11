@@ -120,5 +120,17 @@ public class REST {
 			return model.listAlunos();
 		});
 	}
+	
+	public void entregaProjeto() {
+		post("/listarAlunos", (req, res) -> {
+			Document project = Document.parse(req.body());
+			String id = project.getString("id");
+			String alunos = project.getString("autores");
+			String descricao = project.getString("descricao");
+			String linkGitHub = project.getString("link-git");
+			Document now = model.getProject(id);
+			return model.submitProject(now, alunos, descricao, linkGitHub);
+		});
+	}
 
 }

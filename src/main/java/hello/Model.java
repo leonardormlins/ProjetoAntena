@@ -69,6 +69,13 @@ public class Model {
 		projects.replaceOne(searchQuery, found);
 		return found;
 	}
+	
+	public Document getProject(String _id) {
+		MongoDatabase db = fongo.getDatabase("app");
+		MongoCollection<Document> projects = db.getCollection("projeto");
+		Document found = projects.find(new Document("_id", _id)).first();
+		return found;
+	}
 
 	public void addAluno(Document doc) {
 		MongoDatabase db = fongo.getDatabase("app");
@@ -99,6 +106,15 @@ public class Model {
 	}
 
 	public Document updateProjeto(Document projeto) {
+		MongoDatabase db = fongo.getDatabase("app");
+		MongoCollection<Document> projetos = db.getCollection("projeto");
+		BasicDBObject query = new BasicDBObject();
+		query.append("_id", projeto.get("_id"));
+		Bson newDocument = new Document("$set", projeto);
+		return projetos.findOneAndUpdate(query, newDocument, (new FindOneAndUpdateOptions()).upsert(true));
+	}
+	
+	public Document submitProject(Document projeto, String autores, String desc, String link) {
 		MongoDatabase db = fongo.getDatabase("app");
 		MongoCollection<Document> projetos = db.getCollection("projeto");
 		BasicDBObject query = new BasicDBObject();

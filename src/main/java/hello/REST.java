@@ -122,7 +122,7 @@ public class REST {
 	}
 	
 	public void entregaProjeto() {
-		post("/listarAlunos", (req, res) -> {
+		post("/submit-project", (req, res) -> {
 			Document project = Document.parse(req.body());
 			String id = project.getString("id");
 			String alunos = project.getString("autores");

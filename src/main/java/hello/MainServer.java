@@ -32,18 +32,159 @@ public class MainServer {
  
 		REST controller = new REST(model);
 
-		controller.inserirAluno();
+		controller.cadastroAluno();
 	    controller.search();
-	    controller.loginAluno();
 	    controller.projetos();
 	    controller.atribuirProjeto();
-	    model.addAluno(Document.parse("{'email':'leo@antenas.com','name':'Leo', 'senha':'12345', 'nivel':'1'}"));
+	    controller.ativarUsuario();
+	    
+	    //validacao alunos
+	    controller.validaAluno();
+	    controller.loginAluno();
+	    
+	    model.addAluno(Document.parse(
+	    		"{"
+	    		+ "'email':'leonardo.lins@antenas.com',"
+	    		+ "'name':'Leo', "
+	    		+ "'senha':'12345', "
+	    		+ "'nivel':'1'"
+	    		+ "}"));
     }
     
     
     public static void inicializarPesquisa(){
-    	model.addProjeto(Document.parse("{'_id': '1234', 'nome':'Programa sempre teste!', 'fase':'2', 'responsavel-aluno': '', 'responsavel-prof': '','responsavel-cadi':'joao@email.com'}"));
-    	model.addProjeto(Document.parse("{'_id':'4321','nome':'Codigo elegante', 'fase':'1', 'responsavel-aluno': '','responsavel-cadi':'joao@email.com'}"));
-		model.addProjeto(Document.parse("{'_id': '2', 'nome':'Integra-me', 'fase':'1', 'responsavel-aluno': '','responsavel-cadi':''}"));
+
+    	model.addProjeto(Document.parse(
+        		"{"
+        			+ "'_id':'1234',"
+        			+ "'chave':'ha86sh1'"
+        			+ "'titulo':'Programa sempre teste!',"
+        			+ "'descricao-breve':'Aplicacao que verifica qualitativamente os testes de um time',"
+        			+ "'link-externo-1':'',"
+        			+ "'link-externo-2':'',"
+        			+ "'descricao-completa':'Precisa-se de uma aplicacao que analise todos os testes de um time de desenvolvimento e apresente em um Dashboard',"
+        			+ "'descricao-tecnologias':'Analisa submiss�es de teste JUnit',"
+        			+ "'fase': '4',"
+        			+ "'reuniao': {"
+        				+ "'data': '15/03/2020',"
+        				+ "'horario':'15:00',"
+        				+ "'local': 'S�o Jos� dos Campos',"
+        				+ "'datas-possiveis': ["
+        					+ "{"
+        						+ "'data': '02/03/2020',"
+        						+ "'hora': '13:50'"
+        					+ "}"
+        				+ "]"
+        			+ "}"
+        			+ "'status': {"
+        				+ "'negado': false,"
+        				+ "'motivo': ''"
+        			+ "}"
+        			+ "'entregas': ["
+        				+ "{"
+        					+ "'aluno-responsavel': '',"
+        					+ "'alunos': [],"
+        					+ "'link-repositorio':'',"
+        					+ "'link-cloud':'',"
+        					+ "'comentario':''"
+        				+ "}"
+        			+ "],"
+        			+ "'responsavel-cadi': 'arakaki@fatec.sp.gov.br',"
+        			+ "'responsavel-professor': ["
+        				+ "'giuliano@fatec.sp.gov.br'"
+        			+ "],"
+        			+ "'responsavel-empresario': 'Bill Clever',"
+        			+ "'alunos': ["
+        				+ "'leonardo.lins@fatec.sp.gov.br'"
+        			+ "]"
+        		+ "}"));
+    	model.addProjeto(Document.parse(
+        		"{"
+        			+ "'_id':'1234567',"
+        			+ "'chave':'ahfaasd'"
+        			+ "'titulo':'No rage!',"
+        			+ "'descricao-breve':'Aplicacao que verifica qualitativamente os testes de um time',"
+        			+ "'link-externo-1':'',"
+        			+ "'link-externo-2':'',"
+        			+ "'descricao-completa':'Precisa-se de uma aplicacao que analise todos os testes de um time de desenvolvimento e apresente em um Dashboard',"
+        			+ "'descricao-tecnologias':'Analisa submiss�es de teste JUnit',"
+        			+ "'fase': '4',"
+        			+ "'reuniao': {"
+        				+ "'data': '15/03/2020',"
+        				+ "'horario':'15:00',"
+        				+ "'local': 'S�o Jos� dos Campos',"
+        				+ "'datas-possiveis': ["
+        					+ "{"
+        						+ "'data': '02/03/2020',"
+        						+ "'hora': '13:50'"
+        					+ "}"
+        				+ "]"
+        			+ "}"
+        			+ "'status': {"
+        				+ "'negado': false,"
+        				+ "'motivo': ''"
+        			+ "}"
+        			+ "'entregas': ["
+        				+ "{"
+        					+ "'aluno-responsavel': '',"
+        					+ "'alunos': [],"
+        					+ "'link-repositorio':'',"
+        					+ "'link-cloud':'',"
+        					+ "'comentario':''"
+        				+ "}"
+        			+ "],"
+        			+ "'responsavel-cadi': 'arakaki@fatec.sp.gov.br',"
+        			+ "'responsavel-professor': ["
+        				+ "'giuliano@fatec.sp.gov.br'"
+        			+ "],"
+        			+ "'responsavel-empresario': 'Bill Clever',"
+        			+ "'alunos': ["
+        				+ "'leonardo.lins@fatec.sp.gov.br'"
+        			+ "]"
+        		+ "}"));
+    	model.addProjeto(Document.parse(
+        		"{"
+        			+ "'_id':'678910',"
+        			+ "'chave':'pjefba'"
+        			+ "'titulo':'Lets Encode',"
+        			+ "'descricao-breve':'Aplicacao que verifica qualitativamente os testes de um time',"
+        			+ "'link-externo-1':'',"
+        			+ "'link-externo-2':'',"
+        			+ "'descricao-completa':'Precisa-se de uma aplicacao que analise todos os testes de um time de desenvolvimento e apresente em um Dashboard',"
+        			+ "'descricao-tecnologias':'Analisa submiss�es de teste JUnit',"
+        			+ "'fase': '4',"
+        			+ "'reuniao': {"
+        				+ "'data': '15/03/2020',"
+        				+ "'horario':'15:00',"
+        				+ "'local': 'S�o Jos� dos Campos',"
+        				+ "'datas-possiveis': ["
+        					+ "{"
+        						+ "'data': '02/03/2020',"
+        						+ "'hora': '13:50'"
+        					+ "}"
+        				+ "]"
+        			+ "}"
+        			+ "'status': {"
+        				+ "'negado': false,"
+        				+ "'motivo': ''"
+        			+ "}"
+        			+ "'entregas': ["
+        				+ "{"
+        					+ "'aluno-responsavel': '',"
+        					+ "'alunos': [],"
+        					+ "'link-repositorio':'',"
+        					+ "'link-cloud':'',"
+        					+ "'comentario':''"
+        				+ "}"
+        			+ "],"
+        			+ "'responsavel-cadi': 'arakaki@fatec.sp.gov.br',"
+        			+ "'responsavel-professor': ["
+        				+ "'giuliano@fatec.sp.gov.br'"
+        			+ "],"
+        			+ "'responsavel-empresario': 'Bill Clever',"
+        			+ "'alunos': ["
+        				+ "'leonardo.lins@antenas.com'"
+        			+ "]"
+        		+ "}"));
     }
 }

@@ -18,6 +18,7 @@ dependencies {
 	compile 'org.json:json:20141113'
     compile group: 'junit', name: 'junit', version: '4.+'
     compile group: 'org.apache.commons', name: 'commons-email', version: '1.5'
+    implementation 'com.auth0:java-jwt:3.8.2'
 }
 
 jar {

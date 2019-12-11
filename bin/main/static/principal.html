@@ -43,8 +43,21 @@
       document.getElementById('cadastro').style.display = 'block';
       document.getElementById('chaveProjeto').value = chave;
     }
+
+    function validaEmailEntrega(email) {
+    let texto = /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/;
+    if (texto.test(email)) {
+        if (email.indexOf('@fatec.sp.gov.br', email.length - '@fatec.sp.gov.br'.length) !== -1) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
     
-  </script>
+</script>
  
 
 </head>
